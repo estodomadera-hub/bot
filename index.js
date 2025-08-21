@@ -1,5 +1,5 @@
 // index.js
-require('dotenv').config({ path: './src/config/.env' });
+require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
@@ -12,6 +12,7 @@ const mensajeRoute = require('./src/routes/mensaje');
 
 // 📁 Validación de carpetas críticas
 if (!fs.existsSync('./auth')) fs.mkdirSync('./auth');
+if (!fs.existsSync('./media')) logger.warn('📁 Carpeta /media no encontrada. Algunas funciones pueden fallar.');
 
 // 🤖 Iniciar bot
 startBot();

@@ -1,5 +1,4 @@
 // src/handlers/messageHandler.js
-const iaResponder = require('../core/iaResponder');
 const delay = require('../utils/delay');
 const logger = require('../utils/logger');
 const { sendFollowUp } = require('../utils/sendFollowUp');
@@ -14,9 +13,6 @@ const {
     marcarPedido
 } = require('../core/userStateManager');
 const { esRespuestaImagenPromo } = require('../utils/respuestasUtils');
-
-// 🧠 Historial por usuario para mantener contexto
-const historialPorUsuario = {};
 
 // 🎯 Mapeo de números y palabras
 const opcionesNumericas = {
@@ -199,7 +195,7 @@ const messageHandler = async (sock, msg) => {
 
     // 🔁 Manejo de respuesta al seguimiento
     const respuestaFollowUp = lowerMsg || buttonId;
-    if (['✅ sí', '❌ no'].includes(respuestaFollowUp)) {
+    if (['sí', 'si', '✅ sí', 'no', '❌ no'].includes(respuestaFollowUp)) {
         await manejarRespuestaFollowUp(sock, sender, isAndroid, respuestaFollowUp);
         return;
     }
@@ -235,32 +231,16 @@ const messageHandler = async (sock, msg) => {
     ]);
     const contieneComando = comandosValidos.some(cmd => contexto?.includes(cmd));
 
-
-
-    // 🧾 Fallback - Si no hay comando directo, se usa la IA
-    if (!buttonId && !contieneComando) {
+    if (!contexto || contexto === '' || (!buttonId && !contieneComando)) {
         setUserState(sender, 'activo');
-
-        // 🧠 Guardar historial del usuario
-        if (!historialPorUsuario[sender]) historialPorUsuario[sender] = [];
-        historialPorUsuario[sender].push(`Usuario: ${lowerMsg}`);
-
-        const respuestaIA = await copilotResponder(lowerMsg, historialPorUsuario[sender]);
-        const respuestaFinal = respuestaIA || responder(sender, contexto);
-        await sock.sendMessage(sender, { text: respuestaFinal });
+        await sendFollowUp(sock, sender, isAndroid);
         return;
     }
 
     // 🧠 Respuesta contextual
     setUserState(sender, 'activo');
-
-    if (!historialPorUsuario[sender]) historialPorUsuario[sender] = [];
-    historialPorUsuario[sender].push(`Usuario: ${lowerMsg}`);
-
-    const respuestaIA = await iaResponder(lowerMsg); // Usamos solo el mensaje, ya que iaResponder no necesita historial
-    const respuestaFinal = respuestaIA || responder(sender, contexto);
-
-    await sock.sendMessage(sender, { text: respuestaFinal });
+    const respuesta = responder(sender, contexto);
+    await sock.sendMessage(sender, { text: respuesta });
 };
 
 module.exports = messageHandler;
