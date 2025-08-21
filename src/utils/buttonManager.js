@@ -1,11 +1,11 @@
 // src/utils/buttonManager.js
 
-const generarTextoOpciones = (opciones = [], encabezado = '📋 Respondeme:') => {
+const generarTextoOpciones = (opciones = []) => {
     const texto = opciones.length
         ? opciones.map(({ label }) => `${label.toUpperCase()}`).join('\n')
-        : '🎯 VER PROMOCIONES \n 🛍️ VER CATÁLOGO\n 📍VER UBICACIÓN\n 💬 CONTACTARME';
+        : '🎯 VER PROMOCIONES \n 🛍️ VER CATÁLOGO\n 📍VER UBICACIÓN\n 💬 CONTACTAR UN ASESOR';
 
-    return `${encabezado}\n\n${texto}\n\nEscribí solo el número o lo que está resaltado.`;
+    return `${texto}`;
 };
 
 const sendMenuTexto = async (sock, jid, opciones = []) => {
@@ -22,7 +22,6 @@ const sendMenu = async (sock, jid, isAndroid, opciones = []) => {
         }));
 
         await sock.sendMessage(jid, {
-            text: '📋 Seleccioná una opción:',
             buttons,
         });
     } else {
