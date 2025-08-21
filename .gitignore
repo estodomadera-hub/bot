@@ -1,0 +1,29 @@
+# Node modules
+node_modules/
+
+# Sesión de whatsapp-web.js
+*.sqlite
+
+# Variables de entorno
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Directorios de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos generados por IDEs
+.vscode/
+.idea/
+*.swp
+
+# Builds o dist si generás archivos estáticos
+dist/
+build/
+
+# MongoDB local
+dump/
