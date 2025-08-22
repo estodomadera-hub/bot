@@ -149,7 +149,7 @@ const messageHandler = async (sock, msg) => {
         setUserState(sender, 'activo');
         marcarPedido(sender, 'pidioCatalogo');
         await sock.sendMessage(sender, {
-            text: '🛍️ Puedes ver los artículos disponibles en mi catálogo:\n\n👉 *https://wa.me/c/5493855941088*',
+            text: '🛍️ Puedes ver los artículos disponibles en mi catálogo:\n\n👉 *https://wa.me/c/5493854864263*',
         });
 
         await sock.sendMessage(sender, {
