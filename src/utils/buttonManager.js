@@ -1,11 +1,11 @@
 // src/utils/buttonManager.js
 
 const generarTextoOpciones = (opciones = []) => {
-    const texto = opciones.length
-        ? opciones.map(({ label }) => `${label.toUpperCase()}`).join('\n')
-        : '🎯 VER PROMOCIONES \n 🛍️ VER CATÁLOGO\n 📍VER UBICACIÓN\n 💬 CONTACTAR UN ASESOR';
+    if (!opciones.length) {
+        return `1️⃣ Ver promociones vigentes\n2️⃣ Explorar nuestro catálogo completo\n3️⃣ Ver ubicación y formas de entrega\n4️⃣ Hablar con un asesor ahora`;
+    }
 
-    return `${texto}`;
+    return opciones.map(({ label }, i) => `${i + 1}️⃣ ${label}`).join('\n');
 };
 
 const sendMenuTexto = async (sock, jid, opciones = []) => {

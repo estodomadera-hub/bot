@@ -16,8 +16,10 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "jimp": "^0.16.13",
     "morgan": "^1.10.1",
-    "qrcode-terminal": "^0.12.0"
+    "qrcode-terminal": "^0.12.0",
+    "sharp": "^0.32.6"
   },
   "keywords": [],
   "author": "",
