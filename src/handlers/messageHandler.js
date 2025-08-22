@@ -88,7 +88,7 @@ const messageHandler = async (sock, msg) => {
             logger.evento('REACTIVACIÓN', `Usuario ${sender} reactivado automáticamente tras ${timeoutMin} minutos (mensaje desde catálogo)`);
 
             await sock.sendMessage(sender, {
-                text: '👋 ¡Estoy de vuelta!\n¿Querés seguir explorando el catálogo o hacer otra consulta?',
+                text: '👋 ¡Estoy de vuelta!\n¿Quieres seguir explorando el catálogo o hacer otra consulta?',
             });
 
             await sendMenuTexto(sock, sender);
@@ -153,7 +153,7 @@ const messageHandler = async (sock, msg) => {
         });
 
         await sock.sendMessage(sender, {
-            text: '📍 Estamos en Santiago del Estero. Si querés que te enviemos ubicación o ayuda para elegir, escribinos 😉',
+            text: '📍 Estamos en Santiago del Estero.\n\n Si quieres que te enviemos ubicación o necesitas asistencia nos avisas y te asesoramos. 😉',
         });
 
         return;
@@ -188,7 +188,7 @@ const messageHandler = async (sock, msg) => {
             logger.evento('REACTIVACIÓN', `Usuario ${sender} reactivado automáticamente tras ${timeoutMin} minutos (contacto directo)`);
 
             await sock.sendMessage(sender, {
-                text: '👋 ¡Estoy de vuelta!\n¿Querés seguir explorando el catálogo o hacer otra consulta?',
+                text: '👋 ¡Estoy de vuelta!\n¿Quierés seguir explorando el catálogo o hacer otra consulta?',
             });
 
             await sendMenuTexto(sock, sender);
@@ -213,7 +213,7 @@ const messageHandler = async (sock, msg) => {
             logger.evento('REACTIVACIÓN', `Usuario ${sender} reactivado automáticamente tras ${timeoutMin} minutos (despedida)`);
 
             await sock.sendMessage(sender, {
-                text: '👋 ¡Estoy de vuelta!\n¿Querés seguir explorando el catálogo o hacer otra consulta?',
+                text: '👋 ¡Estoy de vuelta!\n¿Quieres seguir explorando el catálogo o hacer otra consulta?',
             });
 
             await sendMenuTexto(sock, sender);
