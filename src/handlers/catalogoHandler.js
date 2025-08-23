@@ -9,7 +9,7 @@ async function handleCatalogo(sock, sender) {
 
     const mensajeIntro = `🛍️ *Catálogo de estantes disponibles*\n\nTenemos varios modelos hechos en madera de pino con terminación estilo industrial (parecen metálicos, pero son 100% madera).\n\nPodés ver todos los productos con fotos, medidas y precios en el siguiente enlace:`;
 
-    const mensajeLinks = `🟢 *Catálogo por WhatsApp*\nhttps://wa.me/c/5493854864263\n\n🌐 *Ecommerce oficial:*\n🛒 https://es-todo-madera-tienda.vercel.app/\n\n📲 *Seguinos en redes:*\nInstagram 👉 https://www.instagram.com/estodomadera/\n\nFacebook 👉 https://www.facebook.com/estodomadera`;
+    const mensajeLinks = `🟢 *Catálogo por WhatsApp*\nhttps://wa.me/c/5493854864263\n\n📲 *Seguinos en redes:*\nInstagram 👉 https://www.instagram.com/estodomadera/\n\nFacebook 👉 https://www.facebook.com/estodomadera`;
 
     await sock.sendMessage(sender, { text: mensajeIntro });
     await sock.sendMessage(sender, { text: mensajeLinks });
