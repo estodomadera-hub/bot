@@ -11,13 +11,20 @@ const logger = require('./src/utils/logger');
 const mensajeRoute = require('./src/routes/mensaje');
 
 // 📁 Validación de carpetas críticas
-if (!fs.existsSync('./auth')) fs.mkdirSync('./auth');
-if (!fs.existsSync('./media')) logger.warn('📁 Carpeta /media no encontrada. Algunas funciones pueden fallar.');
+if (!fs.existsSync('./auth')) {
+    fs.mkdirSync('./auth');
+    logger.info('📁 Carpeta /auth creada');
+}
 
-// 🤖 Iniciar bot
+if (!fs.existsSync('./media')) {
+    fs.mkdirSync('./media');
+    logger.warn('📁 Carpeta /media no encontrada. Algunas funciones pueden fallar.');
+}
+
+// 🤖 Iniciar bot de WhatsApp
 startBot();
 
-// 🌐 Express para mantener activo en Render
+// 🌐 Configuración de Express
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -30,6 +37,7 @@ app.get('/ping', (req, res) => res.json({ message: 'pong' }));
 // 🧠 Endpoint de conversación contextual
 app.use('/mensaje', mensajeRoute);
 
+// 🚀 Iniciar servidor HTTP
 const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
 
