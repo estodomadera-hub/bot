@@ -3,6 +3,7 @@ const { setUserState, marcarPedido } = require('../core/userStateManager');
 
 const retiroRegex = /(retirar|retiro|coordinar|coordinemos|pasar a buscar)/i;
 const cotizacionRegex = /(cuánto cuesta|cuanto costaría|presupuesto|envío|estoy en|mi dirección|mi ubicación|código postal|localidad)/i;
+const ubicacionRegex = /(dónde están|donde estan|dónde queda|donde queda|de dónde sos|de donde sos|cómo llego|como llego|ubicación|ubicacion|están en|están ubicados)/i;
 const afirmativoRegex = /^(sí|si|dale|ok|quiero hablar|quiero asesor)$/i;
 const negativoRegex = /^(no|no gracias|no hace falta)$/i;
 
@@ -24,7 +25,7 @@ async function handleUbicacion(sock, sender, message = {}) {
     ).toLowerCase().trim();
 
     // 🧭 Mensaje inicial de ubicación
-    if (!retiroRegex.test(texto) && !cotizacionRegex.test(texto) && !afirmativoRegex.test(texto) && !negativoRegex.test(texto)) {
+    if (ubicacionRegex.test(texto)) {
         marcarPedido(sender, 'pidioUbicacion');
 
         await sock.sendMessage(sender, {
