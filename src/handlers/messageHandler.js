@@ -27,7 +27,19 @@ const messageHandler = async (sock, msg) => {
 
     if (!rawMessage && !buttonId) return;
 
-    const textoPlano = rawMessage?.conversation || rawMessage?.extendedTextMessage?.text || '';
+    let textoPlano = '';
+
+    try {
+        textoPlano = rawMessage?.conversation || rawMessage?.extendedTextMessage?.text || '';
+    } catch (err) {
+        // ⚠️ Error de descifrado → ignorar sin responder
+        if (err.message?.includes('Bad MAC') || err.message?.includes('No matching sessions')) {
+            console.warn(`Mensaje no descifrado de ${sender}. Ignorado.`);
+            return;
+        }
+        throw err;
+    }
+
     const contexto = detectarContexto(textoPlano);
 
     // 🧪 Test de stickers
